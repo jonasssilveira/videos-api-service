@@ -44,8 +44,8 @@ $ mvn spring-boot:run
  
 ## Bookmarks
 
-- Link to the [Web Application](http://localhost:4200/)
-- Link to the [API Documentation](http://localhost:8080/swagger-ui/index.html#/)
+- Link to the [Web Application](http://localhost:8080/video-streaming-api)
+- Link to the [API Documentation](http://localhost:8080/video-streaming-api/swagger-ui/#/)
 
 Note:
 
