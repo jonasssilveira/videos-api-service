@@ -56,7 +56,7 @@ public class MetadataControllerTest {
 
     @Test
     public void testGetAllMetadata() throws Exception {
-        mockMvc.perform(get("/metadata")
+        mockMvc.perform(get("/v1/metadata")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON)); // Validate response JSON structure
@@ -73,8 +73,8 @@ public class MetadataControllerTest {
                 .thenReturn(new ResponseEntity<>(Arrays.asList(createSampleMetadata(),
                         createSampleMetadata()), HttpStatus.OK));
 
-        // Perform GET request to /metadata/q with query parameters
-        mockMvc.perform(get("/metadata/q").queryParams(queryParams))
+        // Perform GET request to /v1/metadata/q with query parameters
+        mockMvc.perform(get("/v1/metadata/q").queryParams(queryParams))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(2)));
@@ -88,7 +88,7 @@ public class MetadataControllerTest {
         when(metadataService.getMetadataById(1L))
                 .thenReturn(new ResponseEntity<>(createSampleMetadata(), HttpStatus.OK));
 
-        mockMvc.perform(get("/metadata/{id}", 1))
+        mockMvc.perform(get("/v1/metadata/{id}", 1))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", notNullValue())) // Ensure response is not null
@@ -115,7 +115,7 @@ public class MetadataControllerTest {
 
         var updatedMetadataDTO = createSampleMetadata();
         // Perform the PUT request to update the metadata
-        mockMvc.perform(put("/metadata/{id}", metadataId)
+        mockMvc.perform(put("/v1/metadata/{id}", metadataId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(updatedInputDTO)))
                 .andExpect(status().isOk());
@@ -125,7 +125,7 @@ public class MetadataControllerTest {
                 .thenReturn(new ResponseEntity<>(updatedMetadataDTO, HttpStatus.OK));
 
         // Perform a GET request to fetch the metadata by ID
-        mockMvc.perform(get("/metadata/{id}", metadataId))
+        mockMvc.perform(get("/v1/metadata/{id}", metadataId))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.title", is(updatedMetadataDTO.getTitle()))) ;

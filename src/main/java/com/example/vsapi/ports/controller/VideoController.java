@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 @RestController
-@RequestMapping("/videos")
+@RequestMapping("/v1/videos")
 @Api(value = "VideoController", tags = "Videos")
 public class VideoController {
 

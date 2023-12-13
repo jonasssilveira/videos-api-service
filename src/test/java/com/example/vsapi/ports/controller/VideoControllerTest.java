@@ -34,7 +34,7 @@ public class VideoControllerTest {
     public void testDeleteVideoById() throws Exception {
         Long videoId = 1L; // Replace with an existing video ID in your database
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/videos/{id}", videoId)
+        mockMvc.perform(MockMvcRequestBuilders.delete("/v1/videos/{id}", videoId)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -49,7 +49,7 @@ public class VideoControllerTest {
 
         when(videoService.loadVideo(videoId)).thenReturn(sampleMetadata);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/videos/load/{id}", videoId)
+        mockMvc.perform(MockMvcRequestBuilders.get("/v1/videos/load/{id}", videoId)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(asJsonString(sampleMetadata)));
@@ -58,7 +58,7 @@ public class VideoControllerTest {
     @Test
     public void testPublishVideo() throws Exception {
         String videoJson = "{\"title\":\"Sample Video\", \"url\":\"http://example.com/sample_video.mp4\", \"impressions\":100, \"views\":50}";
-        mockMvc.perform(MockMvcRequestBuilders.post("/videos")
+        mockMvc.perform(MockMvcRequestBuilders.post("/v1/videos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(videoJson))
                 .andExpect(status().isOk());

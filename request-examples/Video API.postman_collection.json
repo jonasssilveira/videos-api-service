@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9473c43d-4524-4691-ac32-dd63c2749682",
+		"_postman_id": "0d34fb5d-3495-4c11-bf74-c264bd3b6f58",
 		"name": "Video API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,7 +14,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/video-streaming-api/swagger-ui-custom.html",
+							"raw": "http://localhost:8081/video-streaming-api/v1/videos",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -22,7 +22,9 @@
 							"port": "8081",
 							"path": [
 								"video-streaming-api",
-								"swagger-ui-custom.html"
+								"",
+								"v1",
+								"videos"
 							]
 						}
 					},
@@ -34,7 +36,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/video-streaming-api/videos/102",
+							"raw": "http://localhost:8081/video-streaming-api/v1/videos/102",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -42,6 +44,7 @@
 							"port": "8081",
 							"path": [
 								"video-streaming-api",
+								"v1",
 								"videos",
 								"102"
 							]
@@ -55,7 +58,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/video-streaming-api/videos/load/2",
+							"raw": "http://localhost:8081/video-streaming-api/v1/videos/load/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -63,6 +66,7 @@
 							"port": "8081",
 							"path": [
 								"video-streaming-api",
+								"v1",
 								"videos",
 								"load",
 								"2"
@@ -77,7 +81,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/video-streaming-api/videos/play/2",
+							"raw": "http://localhost:8081/video-streaming-api/v1/videos/play/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -85,6 +89,7 @@
 							"port": "8081",
 							"path": [
 								"video-streaming-api",
+								"v1",
 								"videos",
 								"play",
 								"2"
@@ -99,7 +104,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/video-streaming-api/metadata/q?director=John Smith&main_actor=David Lee",
+							"raw": "http://localhost:8081/video-streaming-api/v1/metadata/q?director=John Smith&main_actor=David Lee",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -107,6 +112,7 @@
 							"port": "8081",
 							"path": [
 								"video-streaming-api",
+								"v1",
 								"metadata",
 								"q"
 							],
@@ -139,7 +145,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/video-streaming-api/videos",
+							"raw": "http://localhost:8081/video-streaming-api/v1/videos",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -147,6 +153,7 @@
 							"port": "8081",
 							"path": [
 								"video-streaming-api",
+								"v1",
 								"videos"
 							]
 						}
@@ -164,7 +171,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/video-streaming-api/metadata/1",
+							"raw": "http://localhost:8081/video-streaming-api/v1/metadata/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -172,6 +179,7 @@
 							"port": "8081",
 							"path": [
 								"video-streaming-api",
+								"v1",
 								"metadata",
 								"1"
 							]
@@ -194,7 +202,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/video-streaming-api/metadata/1",
+							"raw": "http://localhost:8081/video-streaming-api/v1/metadata/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -202,6 +210,7 @@
 							"port": "8081",
 							"path": [
 								"video-streaming-api",
+								"v1",
 								"metadata",
 								"1"
 							]
