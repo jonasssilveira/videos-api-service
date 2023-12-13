@@ -190,10 +190,40 @@ Note:
 - This process may take a significant amount of time.
 - If [Docker](https://www.docker.com/) is not installed, please install it or follow the steps below.
 
+## Swagger Documentation
+
+The API endpoints are documented using Swagger. You can explore and test the endpoints using the Swagger UI interface. Access the Swagger documentation by navigating to [http://localhost:8081/video-streaming-api/swagger-ui/](http://localhost:8081/video-streaming-api/swagger-ui/#/).
+
+Swagger provides an interactive interface to:
+
+- View all available endpoints.
+- Understand the request methods, parameters, and response structures for each endpoint.
+- Test the endpoints directly within the browser.
+
+Explore and interact with the API endpoints using the Swagger UI.
+
+### Postman Collection
+
+Find the Postman collection in the `request-example` directory, which contains request examples for the API endpoints. Import this collection into Postman to interact with the API.
+
+The collection includes the following:
+
+- Request examples for various endpoints such as GET, POST, PUT, DELETE.
+- Request headers, body, and parameters configured for testing.
+
+### Using Postman
+
+1. Download and install Postman (if you haven't already).
+2. Import the `request-example` Postman collection into Postman.
+3. Modify the request URLs or payloads as needed for testing.
+4. Send requests to interact with the API endpoints.
+
+Make sure to update request details (e.g., URLs, headers, body) in Postman according to your environment or specific configurations.
+
 ## Bookmarks
 
-- Link to the [Web Application](http://localhost:8080/video-streaming-api)
-- Link to the [API Documentation](http://localhost:8080/video-streaming-api/swagger-ui/#/)
+- Link to the [Web Application](http://localhost:8081/video-streaming-api)
+- Link to the [API Documentation](http://localhost:8081/video-streaming-api/swagger-ui/#/)
 
 Note:
 
