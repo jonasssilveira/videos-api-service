@@ -124,26 +124,33 @@ Flyway's integration simplifies database management by automatically applying mi
 
 2. **Docker Compose with Flyway**: The `docker-compose.yml` file includes a service for the database setup. Flyway is integrated into this setup, allowing the migrations to be applied automatically during the Docker build process.
 
-## Installation
+## Testing
 
-Clone the repository:
+### Unit Tests
 
+- The project includes a suite of unit tests that focus on testing individual components or functions in isolation.
+- These tests verify the behavior of small units of code to ensure they work as expected.
+- They are executed without external dependencies or interactions, often using mocking frameworks for isolated testing.
+
+### Integration Tests
+
+- The project also incorporates integration tests that validate the interaction between different modules or components.
+- These tests simulate real-world scenarios and interactions among multiple parts of the application, including database interactions.
+- To mimic database interactions without affecting the actual database, the tests utilize mocking or stubbing techniques, ensuring controlled and predictable behavior.
+
+### Mocked Database Returns
+
+- The integration tests involving database interactions use mocking techniques to simulate database responses.
+- Instead of directly interacting with the actual database, these tests utilize mock objects or frameworks to mimic database behavior.
+- By simulating database returns, these tests maintain independence from the live database, ensuring consistent and repeatable test results.
+
+#### Example:
+
+- The integration tests utilize mocking frameworks like Mockito or similar techniques to mock database returns.
+- Mocking allows us to simulate various database scenarios, ensuring thorough testing of the application's logic without affecting the database's state.
 ```console
-$ git clone https://github.com/jonasssilveira/videos-api-service
-```
-
-## How To Run (Docker)
-
-Run the following command:
-
-```console
-$ docker-compose up
-```
-
-Note:
-
-- This process may take a significant amount of time.
-- If [Docker](https://www.docker.com/) is not installed, please install it or follow the steps below.
+$ mvn test
+``` 
 
 ## Prerequisites
 
@@ -152,17 +159,36 @@ To run the project, the following software must be installed on the system:
 - [Java](https://www.oracle.com/java/) (v17)
 - [Maven](https://maven.apache.org/) (v3.9.0 or higher)
 
-## Requirements
+### Building with Maven
 
-## How To Run
+To build the project, navigate to the project root directory and execute the following commands in your terminal:
 
-Run the following commands in two separate terminals:
+#### With Tests
 
-1. Run:
-
-```console
-$ mvn spring-boot:run
+```bash
+$ mvn clean install
 ```
+
+This command will clean the project, compile the source code, run tests, and package the application.
+
+#### Without Tests
+
+To build the project without running tests:
+
+```bash
+$ mvn clean install -DskipTests
+```
+
+## To Run Docker
+
+```bash
+$ docker-compose up
+```
+
+Note:
+
+- This process may take a significant amount of time.
+- If [Docker](https://www.docker.com/) is not installed, please install it or follow the steps below.
 
 ## Bookmarks
 

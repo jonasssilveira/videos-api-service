@@ -4,6 +4,7 @@ import com.example.vsapi.adapter.VideoRepository;
 import com.example.vsapi.domain.entity.Video;
 import com.example.vsapi.domain.entity.Metadata;
 import com.example.vsapi.domain.use_case.VideoUseCase;
+import com.example.vsapi.dto.output.MetadataDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -62,10 +63,10 @@ class VideoUseCaseTest {
 
         Mockito.when(videoRepository.getVideoById(Mockito.anyLong())).thenReturn(mockVideo);
         videoUseCase.setVideo(1L);
-        //Metadata metadata = videoUseCase.loadVideo();
+        Video video = videoUseCase.loadVideo();
 
         // Ensure that the returned VideoMetadata is not null
-//        Assertions.assertNotNull(metadata);
+        Assertions.assertNotNull(video);
     }
 
     @Test

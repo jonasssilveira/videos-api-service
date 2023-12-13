@@ -80,6 +80,7 @@ class StaffUseCaseTest {
 
         // Mock the behavior of staffRepository.getByName() returning an existing staff
         when(staffRepository.getByName(anyString(), anyBoolean())).thenReturn(staff);
+        when(staffRepository.merge(staff)).thenReturn(staff);
 
         // Call the method to be tested
         Staff result = staffUseCase.merge(staff);
