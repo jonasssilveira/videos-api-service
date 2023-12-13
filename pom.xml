@@ -38,6 +38,12 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.14.1</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
@@ -60,18 +66,6 @@
             <artifactId>springfox-boot-starter</artifactId>
             <version>3.0.0</version> <!-- Use the same version as springfox-swagger2 -->
         </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-            <version>8.5.6</version> <!-- Use the latest version -->
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
     <build>

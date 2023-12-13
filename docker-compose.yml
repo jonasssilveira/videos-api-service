@@ -16,7 +16,7 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
-      - migration
+      - videos-api
 
   flyway:
     image: flyway/flyway
@@ -33,10 +33,21 @@ services:
     depends_on:
       - mysql
     networks:
-      - migration
+      - videos-api
 
+  videos-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    networks:
+      - videos-api
+    depends_on:
+      - mysql
+      - flyway
 volumes:
   mysql-data:
 
 networks:
-  migration:
+  videos-api:

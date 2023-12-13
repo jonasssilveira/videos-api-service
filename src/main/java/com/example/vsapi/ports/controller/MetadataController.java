@@ -3,7 +3,6 @@ package com.example.vsapi.ports.controller;
 import com.example.vsapi.dto.input.MetadataInputDTO;
 import com.example.vsapi.dto.output.MetadataDTO;
 import com.example.vsapi.ports.services.MetadataService;
-import com.example.vsapi.ports.services.VideoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -32,9 +31,6 @@ import java.util.List;
 public class MetadataController {
 
     @Autowired
-    private VideoService videoService;
-
-    @Autowired
     private MetadataService metadataService;
 
     @GetMapping
@@ -46,7 +42,7 @@ public class MetadataController {
                     @ExampleProperty(value = "[{\"title\": \"Example Title 1\", \"runningTime\": 120, \"director\": \"John Doe\", \"mainActor\": \"Jane Smith\", \"synopsis\": \"Example synopsis 1\", \"releaseYear\": \"2023-01-01T00:00:00\", \"genre\": \"Action\", \"video\": \"http://example.com/video1.mp4\", \"staff\": [{\"name\": \"John\", \"main_actor\": true}]}, {\"title\": \"Example Title 2\", \"runningTime\": 90, \"director\": \"Alice Johnson\", \"mainActor\": \"Bob Anderson\", \"synopsis\": \"Example synopsis 2\", \"releaseYear\": \"2022-12-15T00:00:00\", \"genre\": \"Comedy\", \"video\": \"http://example.com/video2.mp4\", \"staff\": [{\"name\": \"Alice\", \"main_actor\": false}, {\"name\": \"Bob\", \"main_actor\": true}]}]", mediaType = "application/json")
             }))
     })
-    public List<MetadataDTO> getAll(){
+    public ResponseEntity<List<MetadataDTO>> getAll() {
         return metadataService.listVideosMetadata();
     }
 
@@ -60,7 +56,7 @@ public class MetadataController {
                     @ExampleProperty(value = "[{\"title\": \"Example Title 1\", \"runningTime\": 120, \"director\": \"John Doe\", \"mainActor\": \"Jane Smith\", \"synopsis\": \"Example synopsis 1\", \"releaseYear\": \"2023-01-01T00:00:00\", \"genre\": \"Action\", \"video\": \"http://example.com/video1.mp4\", \"staff\": [{\"name\": \"John\", \"main_actor\": true}]}, {\"title\": \"Example Title 2\", \"runningTime\": 90, \"director\": \"Alice Johnson\", \"mainActor\": \"Bob Anderson\", \"synopsis\": \"Example synopsis 2\", \"releaseYear\": \"2022-12-15T00:00:00\", \"genre\": \"Comedy\", \"video\": \"http://example.com/video2.mp4\", \"staff\": [{\"name\": \"Alice\", \"main_actor\": false}, {\"name\": \"Bob\", \"main_actor\": true}]}]", mediaType = "application/json")
             }))
     })
-    public ResponseEntity<List<MetadataDTO>> getAllByQuery(@RequestParam MultiValueMap<String, String> queryParams){
+    public ResponseEntity<List<MetadataDTO>> getAllByQuery(@RequestParam MultiValueMap<String, String> queryParams) {
         return metadataService.getMetadataByQuery(queryParams);
     }
 
@@ -74,7 +70,7 @@ public class MetadataController {
             })),
             @ApiResponse(code = 404, message = "Metadata not found")
     })
-    public ResponseEntity<MetadataDTO> getMetadataById(@PathVariable Long id){
+    public ResponseEntity<MetadataDTO> getMetadataById(@PathVariable Long id) {
         return metadataService.getMetadataById(id);
     }
 
@@ -88,7 +84,7 @@ public class MetadataController {
             })),
             @ApiResponse(code = 404, message = "Metadata not found")
     })
-    public ResponseEntity<MetadataDTO> updateMetadata(@PathVariable Long id, @RequestBody MetadataInputDTO inputDTO){
+    public ResponseEntity<MetadataDTO> updateMetadata(@PathVariable Long id, @RequestBody MetadataInputDTO inputDTO) {
         return metadataService.mergeMetadata(id, inputDTO);
     }
 }

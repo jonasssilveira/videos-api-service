@@ -72,7 +72,9 @@ public class VideoController {
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Publish a video", notes = "Publishes a video")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Video published successfully"),
+            @ApiResponse(code = 200, message = "Successfully loaded video metadata", response = MetadataDTO.class, examples = @Example({
+                    @ExampleProperty(value = "{\"title\": \"Example Title\", \"runningTime\": 120, \"director\": \"John Doe\", \"mainActor\": \"Jane Smith\", \"synopsis\": \"Example synopsis\", \"releaseYear\": \"2023-01-01T00:00:00\", \"genre\": \"Action\", \"video\": \"http://example.com/video.mp4\", \"staff\": [{\"name\": \"John\", \"main_actor\": true}]}", mediaType = "application/json")
+            })),
             @ApiResponse(code = 400, message = "Invalid input for publishing video")
     })
     public void publishVideo(@RequestBody VideoInputDTO video){

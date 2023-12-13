@@ -44,14 +44,14 @@ public class MetadataService {
         this.metadataUseCase = new MetadataUseCase(metadataRepository, new StaffUseCase(staffRepository));
     }
 
-    public ArrayList<MetadataDTO> listVideosMetadata() {
-        return (ArrayList<MetadataDTO>) this.metadataUseCase.
+    public ResponseEntity<List<MetadataDTO>> listVideosMetadata() {
+        return ResponseEntity.ok(this.metadataUseCase.
                 listAllVideos().
                 stream().
                 map(metadata -> {
                     return new MetadataDTO().MetadataDTOList(metadata);
                 }).
-                collect(Collectors.toList());
+                collect(Collectors.toList()));
     }
 
     public ResponseEntity<List<MetadataDTO>> getMetadataByQuery(MultiValueMap<String, String> q){
