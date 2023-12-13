@@ -1,8 +1,0 @@
-com/example/vsapi/domain/entity/use_case/StaffUseCaseTest.class
-com/example/vsapi/domain/entity/use_case/VideoUseCaseTest.class
-com/example/vsapi/domain/entity/use_case/MetadataUseCaseTest.class
-com/example/vsapi/ports/controller/MetadataControllerTest.class
-com/example/vsapi/utils/Utils.class
-com/example/vsapi/ports/controller/VideoControllerTest.class
-com/example/vsapi/utils/TemplateMetadataDTO.class
-com/example/vsapi/utils/TemplateVideoDTO.class
