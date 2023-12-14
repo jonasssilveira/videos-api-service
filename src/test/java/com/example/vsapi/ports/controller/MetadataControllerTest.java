@@ -1,21 +1,14 @@
 package com.example.vsapi.ports.controller;
 
-import com.example.vsapi.domain.entity.Metadata;
 import com.example.vsapi.dto.input.MetadataInputDTO;
 import com.example.vsapi.dto.output.MetadataDTO;
-import com.example.vsapi.ports.repository.MetadataRepositoryAdapter;
-import com.example.vsapi.ports.repository.StaffRepositoryAdapter;
 import com.example.vsapi.ports.services.MetadataService;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,19 +16,20 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import static org.hamcrest.Matchers.is;
+import static com.example.vsapi.utils.TemplateMetadataDTO.createSampleMetadata;
+import static com.example.vsapi.utils.Utils.asJsonString;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.example.vsapi.utils.TemplateMetadataDTO.createSampleMetadata;
-import static com.example.vsapi.utils.Utils.asJsonString;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -43,28 +37,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(MetadataController.class)
 @AutoConfigureMockMvc
-@ExtendWith(MockitoExtension.class)
 public class MetadataControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-    @Mock
-    private MetadataRepositoryAdapter metadataRepository;
 
-    @Mock
-    private StaffRepositoryAdapter staffRepository;
-
-    @Autowired
+    @MockBean
     private MetadataService metadataService;
 
-    @BeforeEach
-    public void setUp() {
-        metadataService = new MetadataService(metadataRepository, staffRepository);
-    }
     @Test
     public void testGetAllMetadataSuccess() throws Exception {
-        List<Metadata> metadataDTOList = new ArrayList<>();
-        when(metadataRepository.getAllVideos()).thenReturn(metadataDTOList);
+        List<MetadataDTO> metadataDTOList = new ArrayList<>();
+        when(metadataService.listVideosMetadata()).thenReturn((ResponseEntity.ok(metadataDTOList)));
         mockMvc.perform(get("/v1/metadata")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
