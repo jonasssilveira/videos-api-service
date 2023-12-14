@@ -6,8 +6,14 @@ import com.example.vsapi.domain.use_case.MetadataUseCase;
 import com.example.vsapi.domain.use_case.StaffUseCase;
 import com.example.vsapi.dto.input.MetadataInputDTO;
 import com.example.vsapi.dto.output.MetadataDTO;
+import com.example.vsapi.ports.exceptions.NoContentRequestException;
 import com.example.vsapi.ports.repository.MetadataRepositoryAdapter;
 import com.example.vsapi.ports.repository.StaffRepositoryAdapter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -16,12 +22,6 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.util.MultiValueMap;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -45,16 +45,17 @@ public class MetadataService {
     }
 
     public ResponseEntity<List<MetadataDTO>> listVideosMetadata() {
-        return ResponseEntity.ok(this.metadataUseCase.
+        List<MetadataDTO> metadataDTOList = this.metadataUseCase.
                 listAllVideos().
                 stream().
-                map(metadata -> {
-                    return new MetadataDTO().MetadataDTOList(metadata);
-                }).
-                collect(Collectors.toList()));
+                map(metadata -> new MetadataDTO().MetadataDTOList(metadata)).
+                collect(Collectors.toList());
+        if (metadataDTOList.isEmpty())
+            throw new NoContentRequestException("no content");
+        return ResponseEntity.ok(metadataDTOList);
     }
 
-    public ResponseEntity<List<MetadataDTO>> getMetadataByQuery(MultiValueMap<String, String> q){
+    public ResponseEntity<List<MetadataDTO>> getMetadataByQuery(MultiValueMap<String, String> q) {
 
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Metadata> query = cb.createQuery(Metadata.class);
@@ -71,31 +72,31 @@ public class MetadataService {
 
             if (value != null && !value.isEmpty()) {
                 if ("main_actor".equals(key)) {
-                    predicate = cb.and(predicate,cb.equal(staffJoin.get("mainActor"), true));
-                    predicate = cb.and(predicate,cb.equal(staffJoin.get("name"), value));
+                    predicate = cb.and(predicate, cb.equal(staffJoin.get("mainActor"), true));
+                    predicate = cb.and(predicate, cb.equal(staffJoin.get("name"), value));
                 }
-            }
-            else
-                predicate = cb.and(predicate,cb.equal(root.get(key), value));
+            } else
+                predicate = cb.and(predicate, cb.equal(root.get(key), value));
         }
         query.select(root).distinct(true).where(predicate);
 
         List<Metadata> metadataList = entityManager.createQuery(query).getResultList();
 
-        return ResponseEntity.ok(metadataList.
+        List<MetadataDTO> metadataByList = metadataList.
                 stream().
                 map(MetadataDTO::new).
-                collect(Collectors.toList()));
+                collect(Collectors.toList());
+        if (metadataList.isEmpty())
+            throw new NoContentRequestException("no content");
+        return ResponseEntity.ok(metadataByList);
 
     }
 
-    public ResponseEntity<MetadataDTO> getMetadataById(Long metadataId){
+    public ResponseEntity<MetadataDTO> getMetadataById(Long metadataId) {
         metadataUseCase.setMetadata(metadataId);
         return ResponseEntity.ok(
                 new MetadataDTO(metadataUseCase.getMetadata())
         );
-
-
     }
 
     public ResponseEntity<MetadataDTO> mergeMetadata(Long id, MetadataInputDTO inputDTO) {

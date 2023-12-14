@@ -14,7 +14,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/video-streaming-api/v1/videos",
+							"raw": "http://localhost:8081/video-streaming-api/v1/metadata",
 							"protocol": "http",
 							"host": [
 								"localhost"

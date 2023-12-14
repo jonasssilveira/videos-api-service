@@ -2,6 +2,7 @@ package com.example.vsapi.ports.repository;
 
 import com.example.vsapi.adapter.MetadataRepository;
 import com.example.vsapi.domain.entity.Metadata;
+import com.example.vsapi.ports.exceptions.NotFoundRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +24,7 @@ public class MetadataRepositoryAdapter implements MetadataRepository {
 
     @Override
     public Metadata getMetadataById(Long id) {
-        return this.metadataJpaRepository.getMetadataById(id).orElseThrow(()-> new RuntimeException("Metadata Not found"));
+        return this.metadataJpaRepository.getMetadataById(id).orElseThrow(()-> new NotFoundRequestException("not found"));
     }
 
     @Override

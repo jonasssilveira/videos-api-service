@@ -40,7 +40,9 @@ public class MetadataController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved metadata", response = MetadataDTO.class, responseContainer = "List", examples = @Example({
                     @ExampleProperty(value = "[{\"title\": \"Example Title 1\", \"runningTime\": 120, \"director\": \"John Doe\", \"mainActor\": \"Jane Smith\", \"synopsis\": \"Example synopsis 1\", \"releaseYear\": \"2023-01-01T00:00:00\", \"genre\": \"Action\", \"video\": \"http://example.com/video1.mp4\", \"staff\": [{\"name\": \"John\", \"main_actor\": true}]}, {\"title\": \"Example Title 2\", \"runningTime\": 90, \"director\": \"Alice Johnson\", \"mainActor\": \"Bob Anderson\", \"synopsis\": \"Example synopsis 2\", \"releaseYear\": \"2022-12-15T00:00:00\", \"genre\": \"Comedy\", \"video\": \"http://example.com/video2.mp4\", \"staff\": [{\"name\": \"Alice\", \"main_actor\": false}, {\"name\": \"Bob\", \"main_actor\": true}]}]", mediaType = "application/json")
-            }))
+            })),
+            @ApiResponse(code = 204, message = "")
+
     })
     public ResponseEntity<List<MetadataDTO>> getAll() {
         return metadataService.listVideosMetadata();
@@ -54,7 +56,9 @@ public class MetadataController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved metadata by query parameters", response = MetadataDTO.class, responseContainer = "List", examples = @Example({
                     @ExampleProperty(value = "[{\"title\": \"Example Title 1\", \"runningTime\": 120, \"director\": \"John Doe\", \"mainActor\": \"Jane Smith\", \"synopsis\": \"Example synopsis 1\", \"releaseYear\": \"2023-01-01T00:00:00\", \"genre\": \"Action\", \"video\": \"http://example.com/video1.mp4\", \"staff\": [{\"name\": \"John\", \"main_actor\": true}]}, {\"title\": \"Example Title 2\", \"runningTime\": 90, \"director\": \"Alice Johnson\", \"mainActor\": \"Bob Anderson\", \"synopsis\": \"Example synopsis 2\", \"releaseYear\": \"2022-12-15T00:00:00\", \"genre\": \"Comedy\", \"video\": \"http://example.com/video2.mp4\", \"staff\": [{\"name\": \"Alice\", \"main_actor\": false}, {\"name\": \"Bob\", \"main_actor\": true}]}]", mediaType = "application/json")
-            }))
+            })),
+            @ApiResponse(code = 204, message = "")
+
     })
     public ResponseEntity<List<MetadataDTO>> getAllByQuery(@RequestParam MultiValueMap<String, String> queryParams) {
         return metadataService.getMetadataByQuery(queryParams);

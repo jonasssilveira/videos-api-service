@@ -2,6 +2,7 @@ package com.example.vsapi.ports.repository;
 
 import com.example.vsapi.adapter.StaffRepository;
 import com.example.vsapi.domain.entity.Staff;
+import com.example.vsapi.ports.exceptions.NotFoundRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +17,7 @@ public class StaffRepositoryAdapter implements StaffRepository {
 
     @Override
     public Staff getMainActor() {
-        return staffRepository.getBymainActorTrue().orElseThrow(()->new RuntimeException("not found"));
+        return staffRepository.getBymainActorTrue().orElseThrow(()->new NotFoundRequestException("not found"));
     }
 
     @Override
